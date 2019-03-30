@@ -21,8 +21,9 @@ public class ServerThread implements Runnable{
             while (true) {
                 writer.println("hello!");
                 String line = reader.readLine();
-                if(line.equals("bye")){
+                if(line.equals("bye!")){
                     System.out.println("client：" + line);
+                    writer.println("bye!");
                     writer.close();
                     reader.close();
                     socket.close();

@@ -71,10 +71,24 @@ public class Talking extends JFrame {
         Socket socket = new Socket("127.0.0.1", 8089);
         PrintStream writer = new PrintStream(socket.getOutputStream());
         BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        String message = reader.readLine();
-
-        talkingWords.add("server：" + message);
-        wordList.setListData(talkingWords.toArray());
+        new Thread(()->{
+            while (true){
+                String message = null;
+                try {
+                    message = reader.readLine();
+                    if (message.equals("bye!")) {
+                        talkingWords.add("Server：" + message);
+                        wordList.setListData(talkingWords.toArray());
+                        socket.shutdownInput();
+                        break;
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                talkingWords.add("Server：" + message);
+                wordList.setListData(talkingWords.toArray());
+            }
+        }).start();
 
         JButton sendButton = new JButton("Send");
         sendButton.setBounds(420, 600, 120, 36);
@@ -85,19 +99,15 @@ public class Talking extends JFrame {
                 try {
                     String line = wordsField.getText();
                     wordsField.setText("");
-                    if(line.equals("bye")){
+                    if(line.equals("bye!")){
                         writer.println(line);
                         talkingWords.add(line);
                         wordList.setListData(talkingWords.toArray());
-                        writer.close();
-                        reader.close();
-                        socket.close();
+                        socket.shutdownOutput();
                         sendButton.setEnabled(false);
                     }else {
                         writer.println(line);
-                        String message = reader.readLine();
                         talkingWords.add(line);
-                        talkingWords.add("server：" + message);
                         wordList.setListData(talkingWords.toArray());
                     }
                 } catch (IOException e1) {
