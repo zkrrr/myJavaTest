@@ -1,4 +1,4 @@
-package file.set;
+package set;
 
 import java.util.concurrent.ConcurrentHashMap;
 
