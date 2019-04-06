@@ -16,7 +16,7 @@ public class ServerThread implements Runnable{
     @Override
     public void run() {
         try {
-            PrintStream writer = new PrintStream(socket.getOutputStream());
+                PrintStream writer = new PrintStream(socket.getOutputStream());
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             while (true) {
                 writer.println("hello!");
