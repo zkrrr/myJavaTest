@@ -15,12 +15,12 @@ package leetcode;
 
  */
 
-import java.util.List;
+
 
 class ListNode {
-    public int val;
-    public ListNode next;
-    public ListNode(int x) { val = x; }
+    int val;
+    ListNode next;
+    ListNode(int x) { val = x; }
 }
 
 
@@ -58,7 +58,7 @@ public class AddingTwoNumbers {
             else{
                 break;
             }
-            System.out.println(result.val+"->");
+            System.out.print(result.val+"->");
             result = result.next;
         }
         return result;
@@ -67,16 +67,17 @@ public class AddingTwoNumbers {
     public static void main(String[] args) {
         ListNode l1 = new ListNode(2);
         l1.next = new ListNode(4);
-        l1.next = new ListNode(3);
+        l1.next.next = new ListNode(3);
+        l1.next.next.next = new ListNode(4);
 
 
         ListNode l2 = new ListNode(5);
         l2.next = new ListNode(6);
-        l2.next = new ListNode(4);
+        l2.next.next = new ListNode(4);
 
         ListNode result = AddingTwoNumbers.addTwoNumbers(l1, l2);
 //        while (result!=null){
-//            System.out.println(result.val+"->");
+//            System.out.print(result.val+"->");
 //            result = result.next;
 //        }
     }
