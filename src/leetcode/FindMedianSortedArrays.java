@@ -35,8 +35,6 @@ public class FindMedianSortedArrays {
             return (findKth(nums1,a_len,nums2,b_len,total/2)+findKth(nums1,
                     a_len,nums2,b_len,total/2+1))/2;
         }
-
-
     }
 
     public double findKth(int[] a,int a_len, int [] b,int b_len,int k){
